@@ -2,8 +2,8 @@ const https = require('https')
 
 module.exports = {
   getLTCAddress,
-  getConfirmations,
-  isConfirmed
+  getLTCConfirmations,
+  isLTCConfirmed
 }
 
 async function getLTCAddress (address) {
@@ -23,7 +23,7 @@ async function getLTCAddress (address) {
   })
 }
 
-async function getConfirmations (address) {
+async function getLTCConfirmations (address) {
   const body = await getLTCAddress(address)
   if (body.includes('num-confs')) {
     const match = body.match(/num-confs">(\d+)/) /* istanbul ignore next */
@@ -33,7 +33,7 @@ async function getConfirmations (address) {
   }
 }
 
-async function isConfirmed (address) {
-  const confirmations = await getConfirmations(address)
+async function isLTCConfirmed (address) {
+  const confirmations = await getLTCConfirmations(address)
   return confirmations >= 6
 }
