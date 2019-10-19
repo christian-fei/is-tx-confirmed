@@ -13,7 +13,7 @@ test('false if tx is not confirmed', async t => {
   t.end()
 })
 
-async function isConfirmed (address) {
+async function getLTCAddress (address) {
   return new Promise((resolve, reject) => {
     https.get(`https://live.blockcypher.com/ltc/tx/${address}/`, (res) => {
       const buffer = []
@@ -28,13 +28,19 @@ async function isConfirmed (address) {
         reject(err)
       })
   })
-    .then(body => {
-      if (body.includes('num-confs')) {
-        const match = body.match(/num-confs">(\d+)/)
-        if (!match) return false
-        const confirmations = match[1]
-        return confirmations >= 6
-      }
-      return false
-    })
+}
+
+async function getConfirmations (address) {
+  const body = await getLTCAddress(address)
+  if (body.includes('num-confs')) {
+    const match = body.match(/num-confs">(\d+)/)
+    if (!match) return false
+    const confirmations = match[1]
+    return confirmations
+  }
+}
+
+async function isConfirmed (address) {
+  const confirmations = await getConfirmations(address)
+  return confirmations >= 6
 }
