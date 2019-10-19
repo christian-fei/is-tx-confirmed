@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+const { isLTCConfirmed } = require('..')
+
+main(process.argv[2])
+
+async function main (address) {
+  const confirmed = await isLTCConfirmed(address)
+  console.log(`is${confirmed ? '' : ' not'} confirmed`)
+}
