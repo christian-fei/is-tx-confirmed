@@ -10,7 +10,7 @@ jobs:
       - name: install
         run: |
           npm install
-      - name: uat
+      - name: test
         run: |
           npm t
       # - name: tg
