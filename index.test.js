@@ -1,4 +1,4 @@
-const { test, todo } = require('tap')
+const { test } = require('tap')
 const https = require('https')
 
 test('true if tx is confirmed', async t => {
