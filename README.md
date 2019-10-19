@@ -1,1 +1,1 @@
-# wait-for-confirmed-tx
+# is-tx-confirmed

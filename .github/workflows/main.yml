@@ -1,4 +1,4 @@
-name: wait-for-confirmed-tx build
+name: is-tx-confirmed build
 on: [push]
 jobs:
   build_deploy:
