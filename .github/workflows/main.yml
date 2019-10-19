@@ -1,0 +1,22 @@
+name: wait-for-confirmed-tx build
+on: [push]
+jobs:
+  build_deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: refs/heads/master
+      - name: install
+        run: |
+          npm install
+      - name: uat
+        run: |
+          npm t
+      # - name: tg
+      #   env:
+      #     TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      #     TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
+      #     TELEGRAM_TEXT: "Deployed to https://christianfei.com"
+      #   run: |
+      #     npx simple-telegram-message@latest
